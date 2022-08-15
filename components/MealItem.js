@@ -17,7 +17,7 @@ const MealItem = ({
 }) => {
   return (
     <View style={styles.mealItem}>
-      <TouchableNativeFeedback onPress={onSelectMeal}>
+      <TouchableNativeFeedback onPress={onSelectMeal} useForeground>
         <View>
           <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
             <ImageBackground source={{ uri: image }} style={styles.bgImage}>

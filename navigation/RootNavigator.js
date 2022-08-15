@@ -1,11 +1,11 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import MealsFavTabNavigator from "./MealsNavigator";
+import MainNavigator from "./MealsNavigator";
 
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <MealsFavTabNavigator />
+      <MainNavigator />
     </NavigationContainer>
   );
 };

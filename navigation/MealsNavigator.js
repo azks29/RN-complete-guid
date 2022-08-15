@@ -60,19 +60,9 @@ const MealsNavigator = ({ navigation }) => {
         component={CategoryMealsScreen}
       />
       <Stack.Screen
-        options={{
-          animation: "fade_from_bottom",
-          headerRight: () => (
-            <TouchableNativeFeedback>
-              <Ionicons
-                name="ios-star"
-                size={24}
-                color="white"
-                onPress={() => console.log("Mark as favorit!")}
-              />
-            </TouchableNativeFeedback>
-          ),
-        }}
+        options={({ route }) => ({
+          headerTitle: route.params.title,
+        })}
         name="MealDetail"
         component={MealDetailScreen}
       />
@@ -125,15 +115,28 @@ const Drawer = createDrawerNavigator();
 
 const MainNavigator = () => {
   return (
-    <Drawer.Navigator>
+    <Drawer.Navigator
+      screenOptions={({ route }) => ({
+        drawerIcon: ({ focused, color, size }) => {
+          let IconName;
+          if (route.name === "MealsFav") {
+            IconName = focused ? "ios-restaurant" : "ios-restaurant-outline";
+          } else if (route.name === "Filters") {
+            IconName = focused ? "ios-star" : "ios-star-outline";
+          }
+
+          return <Ionicons name={IconName} size={size} color={color} />;
+        },
+        drawerActiveTintColor: Colors.accentColor,
+        drawerLabelStyle: {
+          fontFamily: "openSansBold",
+        },
+      })}
+    >
       <Drawer.Screen
         options={{
-          headerShown: false,
           drawerLabel: "Meals",
-          drawerActiveTintColor: Colors.accentColor,
-          drawerLabelStyle: {
-            fontFamily: "openSansBold",
-          },
+          headerShown: false,
         }}
         name="MealsFav"
         component={MealsFavTabNavigator}
